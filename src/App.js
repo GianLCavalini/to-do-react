@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { NavbarToDo } from "./components/NavbarToDo";
+import { Input } from "./components/Input";
+import { TaskList } from "./components/TaskList";
+import { useState } from "react";
 
 function App() {
+  const [newTask, setNewTask] = useState({
+    task: "",
+    when: "",
+  });
+
+  const [taskList, setTaskList] = useState([]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavbarToDo />
+      <Input
+        catchNewTask={setNewTask}
+        taskList={taskList}
+        setTaskList={setTaskList}
+      />
+      {/* Criar um novo componente, esse componente tem que receber a nova task e acrescentar isso numa lista de tasks */}
+      <TaskList tasks={taskList} />
     </div>
   );
 }
